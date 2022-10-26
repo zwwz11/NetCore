@@ -24,4 +24,8 @@
     <Folder Include="wwwroot\lib\jquery\dist\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\NetCore.Services\NetCore.Services.csproj" />
+  </ItemGroup>
+
 </Project>

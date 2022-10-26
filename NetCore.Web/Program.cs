@@ -1,7 +1,13 @@
+using NetCore.Services.Interfaces;
+using NetCore.Services.Svcs;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// 의존성 주입 DI
+builder.Services.AddScoped<IUser, UserService>();
 
 var app = builder.Build();
 

@@ -1,10 +1,21 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using NetCore.Data.ViewModels;
+using NetCore.Services.Interfaces;
+using NetCore.Services.Svcs;
 using NetCore.Web.Models;
 
 namespace NetCore.Web.Controllers
 {
     public class MembershipController : Controller
     {
+        private IUser _user;
+
+        public MembershipController(IUser user)
+        {
+            this._user = user;
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -24,9 +35,7 @@ namespace NetCore.Web.Controllers
 
             if(ModelState.IsValid)
             {
-                string userId = "testid";
-                string password = "123456";
-                if (login.UserId.Equals(userId) && login.Password.Equals(password))
+                if (_user.MatchTheUserInfo(login))
                 {
                     TempData["Message"] = "로그인이 성공적으로 이루어졌습니다.";
                     return RedirectToAction("index", "Membership");
